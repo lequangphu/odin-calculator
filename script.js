@@ -1,4 +1,3 @@
-// Create 4 functions for 4 operators: add, subtract, multiply, divide.
 function operate(firstNumber, secondNumber, operator) {
   firstNumber = parseFloat(firstNumber);
   secondNumber = parseFloat(secondNumber);
@@ -17,8 +16,8 @@ function operate(firstNumber, secondNumber, operator) {
   }
 }
 
-let display = document.querySelector('.display');
-let buttons = document.querySelectorAll('button');
+const display = document.querySelector('.display');
+const buttons = document.querySelectorAll('button');
 let firstNumber = '';
 let secondNumber = '';
 let operator = '';
