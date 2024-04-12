@@ -35,10 +35,10 @@ buttons.forEach(button => {
         display.textContent = secondNumber;
       }
     } else if (button.classList.contains('operator')) {
-      if (firstNumber && !operator) {
+      if (firstNumber && !secondNumber) {
         operator = button.textContent;
         decimalCount = 0;
-      } else if (secondNumber && operator) {
+      } else if (firstNumber && secondNumber) {
         firstNumber = operate(firstNumber, secondNumber, operator);
         secondNumber = '';
         operator = button.textContent;
