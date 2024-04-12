@@ -1,0 +1,15 @@
+div {
+  border: 1px solid black;
+}
+
+.container {
+  display: flex;
+}
+
+.calculator, .key {
+  flex-direction: column;
+}
+
+button {
+  flex: 1;
+}

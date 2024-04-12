@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer="defer"></script>
+</head>
+<body>
+    <div class="container calculator">
+      <div class="container display">0</div>
+      <div class="container key">
+        <div class="container row">
+          <!-- 2 buttons: clear, divide -->
+          <button id="clear">Clear</button>
+          <button id="delete">Delete</button>
+          <button class="operator" id="divide">/</button>
+        </div>
+        <div class="container row">
+          <!-- 4 buttons: 7, 8, 9, multiply -->
+          <button class="number" id="7">7</button>
+          <button class="number" id="8">8</button>
+          <button class="number" id="9">9</button>
+          <button class="operator" id="multiply">*</button>
+        </div>
+        <div class="container row">
+          <!-- 4 buttons: 4, 5, 6, subtract -->
+          <button class="number" id="4">4</button>
+          <button class="number" id="5">5</button>
+          <button class="number" id="6">6</button>
+          <button class="operator" id="subtract">-</button>
+        </div>
+        <div class="container row">
+          <!-- 4 buttons: 1, 2, 3, add -->
+          <button class="number" id="1">1</button>
+          <button class="number" id="2">2</button>
+          <button class="number" id="3">3</button>
+          <button class="operator" id="add">+</button>
+        </div>
+        <div class="container row">
+          <!-- 3 buttons: 0, . (decimal), = (equal) -->
+          <button class="number" id="0">0</button>
+          <button id="decimal">.</button>
+          <button id="equal">=</button>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
