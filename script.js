@@ -1,19 +1,36 @@
 function operate(firstNumber, secondNumber, operator) {
   firstNumber = parseFloat(firstNumber);
   secondNumber = parseFloat(secondNumber);
-
+  let result;
   switch (operator) {
     case '+':
-      return firstNumber + secondNumber;
+      result = firstNumber + secondNumber;
+      break;
     case '-':
-      return firstNumber - secondNumber;
+      result = firstNumber - secondNumber;
+      break;
     case '*':
-      return firstNumber * secondNumber;
+      result = firstNumber * secondNumber;
+      break;
     case '/':
-      return Math.round((firstNumber / secondNumber) * 100) / 100;
-    default:
-      return NaN;
+      if (secondNumber === 0) {
+        alert('Cannot divide by zero');
+      } else {
+        result = firstNumber / secondNumber;
+      }
+      break;
   }
+
+  if (result % 1 !== 0) {
+    const resultString = result.toString();
+    const decimalPart = resultString.split('.')[1];
+    
+    if (decimalPart && decimalPart.length > 10) {
+      result = Math.round(result * 1e10) / 1e10;
+    }
+  }
+
+  return result;
 }
 
 const display = document.querySelector('.display');
@@ -26,6 +43,7 @@ let decimalCount = 0;
 buttons.forEach(button => {
   button.addEventListener('click', () => {
     if (button.classList.contains('number')) {
+      console.log(button.textContent);
       if (!operator) {
         firstNumber += button.textContent;
         display.textContent = firstNumber;
@@ -34,6 +52,7 @@ buttons.forEach(button => {
         display.textContent = secondNumber;
       }
     } else if (button.classList.contains('operator')) {
+      console.log(button.textContent);
       if (firstNumber && !secondNumber) {
         operator = button.textContent;
         decimalCount = 0;
@@ -44,40 +63,51 @@ buttons.forEach(button => {
         display.textContent = firstNumber;
         decimalCount = 0;
       }
-    } else if (button.id === 'decimal' && !decimalCount) {
-      decimalCount++;
-      if (!operator) {
-        if (firstNumber) {
-          firstNumber += button.textContent;
-          display.textContent = firstNumber;
+    } else if (button.id === 'decimal') {
+      console.log(button.textContent);
+      if (!decimalCount) {
+        decimalCount++;
+        if (!operator) {
+          if (firstNumber) {
+            firstNumber += button.textContent;
+            display.textContent = firstNumber;
+          } else {
+            firstNumber = '0' + button.textContent;
+            display.textContent = firstNumber;
+          }
         } else {
-          firstNumber = '0' + button.textContent;
-          display.textContent = firstNumber;
+          if (secondNumber) {
+            secondNumber += button.textContent;
+            display.textContent = secondNumber;
+          } else {
+            secondNumber = '0' + button.textContent;
+            display.textContent = secondNumber;
+          }
         }
       } else {
-        if (secondNumber) {
-          secondNumber += button.textContent;
-          display.textContent = secondNumber;
-        } else {
-          secondNumber = '0' + button.textContent;
-          display.textContent = secondNumber;
-        }
+        alert('A number cannot have more than one decimal!');
       }
     } else if (button.id === 'equal') {
+      console.log(button.textContent);
       if (firstNumber && secondNumber && operator) {
-        firstNumber = operate(firstNumber, secondNumber, operator);
+        console.table(firstNumber, secondNumber, operator);
+        display.textContent = operate(firstNumber, secondNumber, operator);
+        firstNumber = '';
         secondNumber = '';
         operator = '';
-        display.textContent = firstNumber;
         decimalCount = 0;
+      } else {
+        alert('Not enough data to calculate, click Clear button to start again!')
       }
     } else if (button.id === 'clear') {
+      console.log(button.textContent);
       firstNumber = '';
       secondNumber = '';
       operator = '';
       display.textContent = '0';
       decimalCount = 0;
     } else if (button.id === 'delete') {
+      console.log(button.textContent);
       if (!operator) {
         firstNumber = firstNumber.slice(0, -1);
         firstNumber ? display.textContent = firstNumber : display.textContent = '0';
