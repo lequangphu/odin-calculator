@@ -1,7 +1,10 @@
 function operate(firstNumber, secondNumber, operator) {
+
   firstNumber = parseFloat(firstNumber);
   secondNumber = parseFloat(secondNumber);
+
   let result;
+
   switch (operator) {
     case '+':
       result = firstNumber + secondNumber;
@@ -39,11 +42,16 @@ let firstNumber = '';
 let secondNumber = '';
 let operator = '';
 let decimalCount = 0;
+let negate = false;
 
 buttons.forEach(button => {
+  
   button.addEventListener('click', () => {
+    
     if (button.classList.contains('number')) {
+      
       console.log(button.textContent);
+      
       if (!operator) {
         firstNumber += button.textContent;
         display.textContent = firstNumber;
@@ -52,7 +60,9 @@ buttons.forEach(button => {
         display.textContent = secondNumber;
       }
     } else if (button.classList.contains('operator')) {
+      
       console.log(button.textContent);
+      
       if (firstNumber && !secondNumber) {
         operator = button.textContent;
         decimalCount = 0;
@@ -62,9 +72,15 @@ buttons.forEach(button => {
         operator = button.textContent;
         display.textContent = firstNumber;
         decimalCount = 0;
+      } else if (display.textContent && !firstNumber) {
+        operator = button.textContent;
+        firstNumber = display.textContent;
+        decimalCount = 0;
       }
     } else if (button.id === 'decimal') {
+      
       console.log(button.textContent);
+      
       if (!decimalCount) {
         decimalCount++;
         if (!operator) {
@@ -88,9 +104,10 @@ buttons.forEach(button => {
         alert('A number cannot have more than one decimal!');
       }
     } else if (button.id === 'equal') {
+      
       console.log(button.textContent);
+      
       if (firstNumber && secondNumber && operator) {
-        console.table(firstNumber, secondNumber, operator);
         display.textContent = operate(firstNumber, secondNumber, operator);
         firstNumber = '';
         secondNumber = '';
@@ -100,20 +117,56 @@ buttons.forEach(button => {
         alert('Not enough data to calculate, click Clear button to start again!')
       }
     } else if (button.id === 'clear') {
+      
       console.log(button.textContent);
+      
       firstNumber = '';
       secondNumber = '';
       operator = '';
       display.textContent = '0';
       decimalCount = 0;
     } else if (button.id === 'delete') {
+      
       console.log(button.textContent);
+      
       if (!operator) {
         firstNumber = firstNumber.slice(0, -1);
         firstNumber ? display.textContent = firstNumber : display.textContent = '0';
       } else {
         secondNumber = secondNumber.slice(0, -1);
         secondNumber ? display.textContent = secondNumber : display.textContent = '0';
+      }
+    } else if (button.id === 'negate') {
+
+      console.log(button.textContent);
+      
+      if (parseFloat(display.textContent) > 0) {
+        if (!secondNumber) {
+          display.textContent = '-' + display.textContent;
+          firstNumber = display.textContent;
+        } else {
+          display.textContent = '-' + display.textContent;
+          secondNumber = display.textContent;
+        }
+      } else if (parseFloat(display.textContent) < 0) {
+        if (!secondNumber) {
+          display.textContent = display.textContent.slice(1);
+          firstNumber = display.textContent;
+        } else {
+          display.textContent = display.textContent.slice(1);
+          secondNumber = display.textContent;
+        }
+      }
+    } else if (button.id === 'percent') {
+
+      console.log(button.textContent);
+      
+      if (firstNumber && !secondNumber) {
+        firstNumber = (parseFloat(firstNumber) / 100).toString();
+        display.textContent = firstNumber;
+      } else if (firstNumber && secondNumber) {
+        secondNumber = (parseFloat(secondNumber) / 100).toString();
+        display.textContent = secondNumber;
       }
     }
   })
