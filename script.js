@@ -44,6 +44,22 @@ let operator = '';
 let decimalCount = 0;
 let negate = false;
 
+// Add data-key attribute to each button in the HTML
+buttons.forEach((button) => {
+  button.setAttribute('data-key', button.textContent);
+});
+
+// Add keyboard event listener for keydown
+document.addEventListener('keydown', (event) => {
+  const key = event.key;
+  const button = document.querySelector(`button[data-key="${key}"]`);
+
+  if (button) {
+    button.click();
+  }
+});
+
+// Calculating logics
 buttons.forEach(button => {
   
   button.addEventListener('click', () => {
